@@ -1,0 +1,139 @@
+<main class="container pt-5">
+  <div style="position: relative;"><img src="<%= @category.image %>" class="card-img-top" alt="Card image cap" style ="object-fit: cover;
+    height: 500px;">
+    <div class="text-block" style="position: absolute; bottom: 20px; right: 20px; background-color: black; opacity: 0.9; color: white; padding-left: 20px;
+      padding-right: 20px;">
+      <h1><%= @category.title %></h1>
+      <% @category.stars.to_i.times do %>
+        <i class="fa fa-star" style="color: #ffde00"></i>
+      <% end %>
+      <h3><%= @category.city %></h3>
+      <h5><%= @category.address%></h5>
+      <h5><%= @category.phone %></h5>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+
+
+
+
+   
+    <div class="row pt-5 db-6" style="text-align: center;">
+      <% @category.services.each do |service| %>
+      <% if !service.product %>
+        <div class="col-md mb-3">
+          <div class="card h-100 bg-dark text-dark ">
+            <div class="container">
+            <h5 class="card-title" style="color: white;" ><%= service.name%></</h5>
+            <h5 class="card-title" style="color: white;" ><%= service.description%></</h5>
+            <p class="card-text" style="color: grey;"><%= number_to_currency(service.price, unit: "USD", separator: ",", delimiter: " ", format: "%n %u") %></p>
+            </div>
+          </div>
+        </div>
+      <% end%>
+      <% end%>
+    </div>
+
+
+
+
+
+
+
+    <div class="row pt-5 db-6">
+      <div class="col-sm-2 col-12">
+        <nav class="nav flex-column">
+            <% if @category.has_children? %>
+							<% Category.children_of(@category).each do |sub_category| %>
+              <div class="card h-100" style="background-color: black;">
+							<%= active_link_to sub_category.title, category_path(sub_category), class: 'btn btn-outline-light'%></br>
+              </div>
+  						<% end %>
+  					<% end %>
+             
+           <!--<a class="nav-link active" aria-current="page" href="#">Active</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+          <div class="price">
+        </nav>
+          </div>
+
+<div class="row">
+  <% @category.products.each_slice(2) do |products_row| %>
+    <div class="row row-cols-2 align-items-stretch">
+      <% products_row.each do |product| %>
+        <div class="col mb-4">
+          <div class="card bg-dark text-white h-100">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <% if product.photo.attached? %>
+                  <%= link_to product do %>
+                    <%= image_tag product.photo, class: 'card-img-top', alt: 'Card image cap', style: 'object-fit: cover; height: 150px; width: 100px' %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col-md-8">
+                <%= link_to product, class: 'text-decoration-none text-light' do %>
+                <div class="card-body">
+                  <class="card-title">
+                    <h3><%= product.second_name %> <%= product.title %> <%= product.patronymic %></h3>
+                  <p class="card-text" style="text-align: left; font-size: 100%;">
+                    <p style="text-align: left;">Дата народження: <%= product.birthday_date %> Вік: <%= product.price.to_i %></p>
+                  </p>
+                  <p class="card-text">
+                    <p style="text-align: left;">Номер телефону: <%= product.phone_number %></p>
+                  </p>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+      <% if @category.has_children? %>
+        <% Category.children_of(@category).ids.each do |id| %>
+         	<% Category.find(id).products.each do |product| %>
+          <div class="col-md-5">
+         		<div class="card h-100" style="background-color: black;">
+            <%= link_to product do%>
+              <div class="card bg-dark text-dark">
+              <% if product.photo.attached? %>
+    <%= image_tag product.photo %>
+  <% end %>
+
+                <div style="color: $gray-500; text-decoration: underline;">
+                  <div class="container">
+                  </br>
+                  <h5 class="card-title" style="color: white;" ><%= product.title%></</h5>
+                  <p class="card-text text-truncate" style="color: white;"><%= product.description%></p>
+                  <p class="card-text" style="color: grey;"><%= number_to_currency(product.price, unit: "USD", separator: ",", delimiter: " ", format: "%n %u") %></p>
+                  </div>
+                </div>
+            </div>
+         		<% end %>
+          </div>
+        </div>
+         	<% end %>
+        <% end %>
+      <% end %>
+    </div>
+</div>
+
+
+  
+<div class="digg_pagination" style="text-align: center;">
+    <%= will_paginate @products, :container => false %>
+</div>
+
+</main>
+
+      

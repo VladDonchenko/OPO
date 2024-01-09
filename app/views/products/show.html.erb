@@ -1,0 +1,66 @@
+<div class="container" style="color: white;">
+    <div class="pt-5">
+        <section class="mb-5">
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <div id="mdb-lightbox-ui"></div>
+                    <div class="mdb-lightbox">
+                        <div class="row product-gallery mx-1">
+                            <div class="col-12 mb-0">
+                                <div class="pt-5">
+                                    <% if @product.photo.attached? %>
+                                        <%= link_to @product.photo, data: { lightbox: 'gallery' } do %>
+                                            <%= image_tag @product.photo, style: 'max-width:100%;' %>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="pt-5">
+                        <hr>
+                        <h5 style="text-align: center; font-size:400%;"><%= @product.second_name %> <%= @product.title %> <%= @product.patronymic %></h5>
+                        <hr>
+
+                       
+                        
+                        
+
+                        <p class="text-muted" style="font-size:150%;"> ДАТА НАРОДЖЕННЯ:  <a "<%= @product.description%>" style="color: white; text-decoration: none;"><%= @product.birthday_date %></a><h5 style="font-size:200%;"></h5></p>
+                        <p  class="text-muted" style="font-size:150%;"> ВІК: <a "<%= @product.description%>" style="color: white; text-decoration: none;"><%= @product.price.to_i %></a>   Сімейний статус: <a "<%= @product.description%>" style="color: white; text-decoration: none;"><%= @product.material_status %></a></p>
+                        <p class="text-muted" style="font-size:150%;"> МІСЦЕ НАРОДЖЕННЯ: <a "<%= @product.description%>" style="color: white; text-decoration: none;"><%= @product.address %></a> 
+                          </p>
+                     
+                        <hr>
+                        <p class="mb-2 text-muted  small" style="font-size:150%;">МІСЦЕ ОБЛІКУ:<a "<%= @product.category.title %>" style="color: white; text-decoration: none;"><%= @product.category.title %></a></p>
+                        <p class="mb-2 text-muted small" style="font-size:150%;">АДРЕСА ПРОЖИВАННЯ: <a "<%= @product.category.title %>" style="color: white; text-decoration: none;"><%= @product.registration_address %></a></p>
+
+
+
+                        <p class="mb-2 text-muted  small" style="font-size:150%;">НОМЕР ТЕЛЕФОНУ: <a "<%= @product.category.title %>" style="color: white; text-decoration: none;"><%= @product.phone_number %></a></p>
+                        <p class="mb-2 text-muted  small" style="font-size:100%;">ДОДАТКОВА ІНФОРМАЦІЯ: <a "<%= @product.description%>" style="color: white; text-decoration: none;"><%= @product.phone_number %></a></p>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-sm table-borderless mb-0">
+                            <!-- Ваша таблиця -->
+                        </table>
+                    </div>
+                    <hr>
+                    <% if current_user.present? %>
+                    <%= link_to 'Групувати родину', product_order_items_path(@product), method: :post, class: "btn btn-outline-dark", style:"color: white; font-size:150%;" %>
+                    <%= link_to 'Створити примітку', new_comment_path(user_id: current_user, product_id: @product), method: :get, class: "btn btn-outline-dark", style:"color: white; font-size:150%" %>
+                    <% else %>
+                    <p style="font-size: 150%;"><%= link_to 'Увійти в систему', new_user_session_path ,class: "btn btn-outline-dark", style: "color: white; font-size: 90%;"%>&nbsp; - для того щаб почати роботу </p>
+                    <% end %>
+                    
+                </div>
+            </div>
+        </section>
+        <div class="col-lg-12 sm-12">
+            <%= render 'comments/comment_show' %>
+        </div>
+    </div>
+</div>

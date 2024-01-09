@@ -1,0 +1,91 @@
+<main class="container pt-5">
+        <div class="row pt-5">
+          <div class="col-sm-3 col-12 mb-3">
+                    <nav class="nav flex-column", style="color: black; ">
+
+                      <% Category.roots.each do |category| %>
+                          <%= active_link_to category.title, category_path(category), class: "btn btn-outline-light"
+                         %></br>
+                      <% end %>
+
+
+
+          <div class="price">
+          </nav>
+          </div>
+          <div class="col-sm-9 col-12">
+            <div>
+            </div>
+
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------- -->
+
+
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                  <img src="https://biz.liga.net/images/general/2019/12/03/thumbnail-tw-20191203162639-1234.jpg?v=1575388432" class="d-block w-100">
+                </div>
+                <div class="carousel-item" data-bs-interval="10000">
+                  <img src="https://g-store.com.ua/wp-content/uploads/2020/10/iphone-12-pro-kypit.png" class="d-block w-100">
+                </div>
+                <div class="carousel-item" data-bs-interval="10000">
+                  <img src="https://mobidevices.ru/images/2018/07/Apple-MacBook-2018.jpg" class="d-block w-100">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </a>
+            </div> <br/>
+<div class="row db-6 sm-9">
+  <%= render @products %>
+</div>
+
+
+<div class="container">
+  <div class="container">
+    <div class="container">
+      <div class="container">
+        <div class="container">
+<div class="container">
+  <div class="container">
+    <div class="container">
+      <div class="container">
+        <div class="container">
+          <div class="container">
+            <div class="container p-4">
+              <div class="container">
+                <div class="container">
+                  <div class="container">
+                    <div class="digg_pagination" style="color: white; text-align: center;">
+                      <%= will_paginate @products, :previous_label => 'Попередня', :next_label => 'Наступна', renderer: BootstrapPagination::Rails%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------- -->
+ </div>
+        </div>
+
+      </main><!-- /.container -->

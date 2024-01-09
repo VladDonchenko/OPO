@@ -1,0 +1,79 @@
+<div class="container" style="color: white;">
+  <div class="pt-5">
+  <br>
+    <div class="row">
+
+      <h1><%= @user.name %> <%= @user.surname %></h1>
+
+      <% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar %>
+<% else %>
+  <!-- Якщо фото не завантажено -->
+  <p>No avatar uploaded</p>
+<% end %>
+
+
+      <div class="col-2 pt-1">
+      <h3><%= @user.email %></h3>
+      <h5><%= @user.user_phone %></h5>
+      
+
+
+
+      </div>
+
+    </div>
+  </div>
+  
+  
+<div class="row">
+  <div class="pt-3">
+    <div class="col-4 pt-1">
+  <% if @user == current_user %>
+  <div class="d-flex justify-content-left" ;"><%= link_to "Редагувати власну інформацію", edit_user_registration_path, class: "btn btn-outline-dark", style: "color: white;" %></div>
+  <% end %>
+</div>
+</div>
+</div>
+
+<hr>
+<h4 class="d-flex justify-content-center"> Мої бронювання:</h4>
+
+
+
+<div class="row pt-5 db-6" style="text-align: center;">
+    <% @orderlist.each do |order| %>
+
+      <div class="col-md-3">
+        <div class="card h-100 bg-dark text-dark ">
+          <div class="container">
+            <img src="<%= order.product.image %>" alt="" style ="object-fit: cover;
+                  height: 200px;">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card h-100 bg-dark text-dark ">
+          <div class="container">
+          </br>
+            <h5 class="card-title" style="color: white;" ><%= order.product.title%></</h5>
+            <h1 class="card-title" style="color: white;" ><%= order.id%></</h1>
+                <h5 class="card-title" style="color: white;" ><%= order.quantity%></</h5>
+                
+                <%= link_to 'Видалити з замовлень', product_order_item_path(order.product, order), class: "btn btn-outline-light", method: :delete%>
+          </div>
+        </div>
+      </div>
+
+    <% end%>
+</div>
+
+
+
+
+
+ 
+
+<table class="table table-bordered"></table>
+
+</div>

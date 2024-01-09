@@ -1,0 +1,62 @@
+<div style="text-align: center; color: white;">
+</br>
+</br>
+</br>
+
+<h1>Редагування вашої інформації</h1>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">  
+  <%= f.label :name, "Ім'я", style: "font-size: 150%;"%></br>    
+      <%= f.text_field :name, autofocus: true , autocomplete: "first name", class: 'btn btn-outline-dark', style: "color: white" %>
+      
+  </div>
+
+  <div class="field">
+      <%= f.label :surname, "Прізвище", style: "font-size: 150%;"%></br>   
+    <%= f.text_field :surname, autofocus: true , autocomplete: "last name", class: 'btn btn-outline-dark', style: "color: white"%>
+  
+  </div>
+
+  <div class="field">
+      <%= f.label :user_phone, "Номер телефону", style: "font-size: 150%;"%></br>   
+    <%= f.text_field :user_phone, autofocus: true , autocomplete: "user_phone", class: 'btn btn-outline-dark', style: "color: white"%>
+  
+  </div>
+
+  <div class="field">
+    <%= f.label :email, style: "font-size: 150%;" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'btn btn-outline-dark', style: "color: white" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password, "Новий пароль", style: "font-size: 150%;" %> <i></i><br />
+    <%= f.password_field :password, autocomplete: "new-password", class: 'btn btn-outline-dark', style: "color: white" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em>Мінімум <%= @minimum_password_length %> символів</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "Підтвердження нового паролю", style: "font-size: 150%;" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'btn btn-outline-dark', style: "color: white" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password ,"Актуальний пароль", style: "font-size: 150%;"%> <i></i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password", class: 'btn btn-outline-dark', style: "color: white" %>
+  </div>
+</br>
+  <div class="actions">
+    <%= f.submit "Оновити інформацію" , class: 'btn btn-outline-light'%>
+  </div>
+<% end %>
+</br>
+<%= link_to "Назад", :back , class: 'btn btn-outline-light'%>

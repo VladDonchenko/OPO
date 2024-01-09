@@ -1,0 +1,22 @@
+
+</br>
+</br>
+</br><div style="border: white;">
+  <h2>Забули пароль?</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email, "Введіть ваш email"%><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "btn btn-outline-dark", style: "color: white"  %>
+    </div>
+  </br> 
+
+    <div class="actions">
+      <%= f.submit "Надіслати інструкції для зміни паролю", class: "btn btn-outline-dark", style: "color: white"  %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

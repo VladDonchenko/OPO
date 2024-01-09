@@ -1,0 +1,50 @@
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<h2 style="text-align: center;">Примітки та потреби:</h2>
+<div class="comment" style="color: black;">
+  <% @product.comments.each do |comment| %>
+  
+    <div class="card shadow mb-5" style="background-color:black; color: white; border: 1px solid rgb(250, 250, 250)">
+      <div class="card-header">
+      	<h6><%= comment.user.email %></h6>
+        <h6>Важливість потреби:
+<% case comment.rating %>
+  <% when 4..5 %>
+    <% comment.rating.times do %>
+      <i class="fa fa-square" style="color: #ff0000"></i>
+    <% end %>
+  <% when 2..3 %>
+    <% comment.rating.times do %>
+      <i class="fa fa-square" style="color: #ffff00"></i>
+    <% end %>
+  <% else %>
+    <% comment.rating.times do %>
+      <i class="fa fa-square" style="color: #00ff00"></i>
+    <% end %>
+<% end %>
+<% blank_stars(comment.rating).times do %>
+  <i class="fa fa-square" style="color: #e1e1e1"></i>
+<% end %></h6>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= comment.body %></p>
+        <div style="text-align: center;">
+        	 <% if current_user.present? %>
+	        	<% if current_user.email == comment.user.email %>
+	        		<%= link_to ("Редагувати"), edit_comment_path(comment), class: "btn btn-outline-light" %>
+	            	<%= link_to ("Видалити"), comment_path(comment), method: :delete, class: "btn btn-outline-light",
+	                              data: {confirm: 'Confirm delete your comment?'} %>
+	             <% end %>
+            <% end %>
+         </div>
+      </div>
+
+        <div class="row">
+
+        </div>
+    </div>
+  
+<% end %>
+
+  </div>
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> OPO-Oblik-Peremizchenuh-Osib</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+ <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application' %>
+
+  </head>
+
+  <body>
+  <div class="wrapper">
+  <div id="header">
+    <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: black;  ">
+    <div class="container-fluid">
+      <a class="navbar-brand" style="color: white;" href="/"><i class="fas fa-location-arrow"></i>OPO</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="/">Головна</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="/portfolio">Про Нас</a>
+        </li>
+        <li class="nav-item dropdown">
+
+          
+
+          <% if current_user %>
+
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+           <%= current_user.email %>  </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li> <%= link_to '⠀⠀Профіль' , profile_user_path(current_user), style:"color: black; text-decoration: none;
+            texr-align: center;"%>&emsp;</li>
+            <li><a class="dropdown-item" href="#"><%= link_to '⠀⠀Вихід', destroy_user_session_path, method: :delete, style:"color: black; text-decoration: none;
+            texr-align: center;"%></a></li>
+          </ul>
+          <% else %>
+              <%= link_to 'Вхід',new_user_session_path,class: 'nav-link'%>
+              <% end %>
+       
+        </li>
+
+      </ul>
+      <%if current_user %>
+      <%= link_to 'Поставити на облік', new_product_path,class: 'btn btn-outline-dark', style:'color: white'%>&nbsp;&nbsp;
+      <%= link_to 'Групування родини',order_path(current_order),class: 'btn btn-outline-dark', style:'color: white'%>&nbsp;&nbsp;
+      <% end %>
+      <%= form_tag products_path, method: :get, class: "form-inline my-2 my-lg-0 search_form", id: "search-form" do %>
+        <%= text_field_tag(
+          :search,
+          params[:search],
+          placeholder: "Пошук", class: 'btn btn-outline-dark', style:'color: white'
+          )%>&nbsp;
+          <%= submit_tag "Шукати", class: 'btn btn-outline-dark', style:'color: white' %>
+      <% end %>
+      </div>
+    </div>
+
+    </nav>
+  </div>
+  </header>
+   
+</div>
+
+
+<div class="content">
+    <%= yield %>
+</div>
+
+
+      <div class="footer">
+
+    <footer class="text-white" style="background-color: black;">
+      <!-- Grid container --> 
+    <p style="text-align: center;">----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+    
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media 
+          border-bottom: 1px dashed rgb(255, 255, 255); border-width: 2px;
+    border-bottom-left-radius: 50px; border-bottom-right-radius: 40px; 
+        -->
+         
+
+        <section class="mb-2">
+          <!-- Facebook -->
+          <div class="row">
+            <div class="col-4">
+            <a class="navbar-brand" style="color: white;" href="/"><i class="fas fa-location-arrow"></i>OPO</a></br>
+            </div>
+
+
+            <div class="col-4 text-center p-4">
+            <a class="btn btn-outline-light  btn-floating m-1" href="https://www.facebook.com/" role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/" role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://google.com/" role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://instagram.com/" role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.github.com/" role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+            </div>
+
+
+            <div class="col-4 p-3" style="text-align: right;">
+              <i class="fab fa-cc-paypal" style="font-size: 70px;"></i>&emsp;
+             <i class="fab fa-cc-visa" style="font-size: 70px;"></i>
+            </div>
+
+          </div>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center">
+
+        Oblik-Peremizchenuh-Osib © 2024
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+
+</div>
+</body>
+
+
+</html>

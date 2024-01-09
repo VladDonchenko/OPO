@@ -1,0 +1,26 @@
+
+<main class="container pt-5" style="top: 300px;">
+  <div class="row pt-5">
+    <% @items.each do |item| %>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="card bg-dark text-dark d-flex flex-column h-100">
+          <%= image_tag rails_blob_path(item.product.photo), class: 'card-img-top flex-fill', alt: 'Card image cap' %>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title" style="color: white;"><%= item.product.second_name %> <%= item.product.title %> <%= item.product.patronymic %></h5>
+            <p class="card-text" style="color: grey;"><%= item.product.address %></p>
+            <p class="card-text" style="color: grey;">Вік: <%= item.product.price.to_i %></p>
+            <div class="mt-auto text-center">
+              <%= link_to 'Видалити з групування', product_order_item_path(item.product, item), class: "btn btn-outline-light", method: :delete %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="text-center"><%= link_to "Згрупувати сім'ю", complete_order_path(current_order), class: 'btn btn-outline-light' %></div>
+</main>
+
+
+ 
+
+

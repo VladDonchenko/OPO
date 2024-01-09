@@ -1,0 +1,22 @@
+<div class="col-md-6 mb-4">
+  <div class="card bg-dark text-white h-100">
+    <%= link_to product, class: 'text-white', style: 'text-decoration: none;' do %>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <% if product.photo.attached? %>
+            <%= image_tag product.photo, class: 'card-img-top', alt: 'Card image cap', style: 'object-fit: cover; height: 150px; width: 100px' %>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="text-white"><%= product.second_name %> <%= product.title %> <%= product.patronymic %></h3>
+            <p class="card-text text-white">
+              <p class="text-white">Дата народження: <%= product.birthday_date %> Вік: <%= product.price.to_i %></p>
+              <p class="text-white">Номер телефону: <%= product.phone_number %></p>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

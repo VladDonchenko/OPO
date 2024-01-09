@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="pt-5" style="text-align: left;">
+    <h1 style="color: white;"><strong>Форма встановлення на облік:</strong></h1>
+    <%= form_with(model: products) do |form| %>
+      <% if products.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(products.errors.count, "error") %> prohibited this task from being saved:</h2>
+          <ul>
+            <% products.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <p>Місце обліку: <nobr class="req">*</nobr>
+        <%= form.select :category_id, options_from_collection_for_select(Category.all, :id, :title) %></p>
+
+        <p>Адреса реєстрації: <nobr class="req">*</nobr></p>
+        <%= form.text_field :registration_address, class: 'form-control' %>
+ 
+      </div></br>
+
+    <div class="field" style="display: flex; align-items: center;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <p style="margin-bottom: 5px;">Прізвище: <nobr class="req">*</nobr></p>
+        <%= form.text_field :second_name, class: 'form-control' %>
+      </div>
+
+      <div style="margin-left: 20px; display: flex; flex-direction: column; align-items: flex-start;">
+        <p style="margin-bottom: 5px;">Ім'я: <nobr class="req">*</nobr></p>
+        <%= form.text_field :title, class: 'form-control' %>
+      </div>
+
+      <div style="margin-left: 20px; display: flex; flex-direction: column; align-items: flex-start;">
+        <p style="margin-bottom: 5px;">По батькові: <nobr class="req">*</nobr></p>
+        <%= form.text_field :patronymic, class: 'form-control' %>
+      </div>
+    </div></br>
+
+    <div class="field">
+        <p>Стать: <nobr class="req"><%= form.select :gender, Product.genders.keys.map { |gender| [gender.capitalize, gender] }, include_blank: true %>&nbsp;</nobr>   Сімейний статус: <nobr class="req"><%= form.select :material_status, Product.material_statuses.keys.map { |material_status| [material_status.capitalize,material_status] }, include_blank: true %></nobr></p>
+      </div>
+
+
+      <div class="field">
+        <p>Дата народження: <nobr class="req">*</nobr></p>
+        <%= form.date_field :birthday_date, class: 'form-control', id: 'birthday_date' %>
+      </div>
+
+      <div class="field">
+        <%= form.text_field :age, class: 'form-control', placeholder: "повна кількіть років", id: 'age', hidden: true %>
+      </div>
+
+      <div class="field">
+        <p>Номер телефону: <nobr class="req">*</nobr></p>
+        <%= form.text_field :phone_number, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <p>Місце народження: <nobr class="req">*</nobr></p>
+        <%= form.text_field :address, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <p>Додаткова інформація: <nobr class="req">*</nobr></p>
+        <%= form.text_area :description, class: 'form-control', rows: "3" %>
+      </div>
+
+       <div class="field">
+        <p>Портретне фото: <nobr class="req">*</nobr></p>
+        <%= form.file_field :photo, id: "photo-upload" %>
+     
+        <img src="#" alt="Місце для фото" id="photo-preview" style="max-width: 300px; max-height: 300px;">
+      </div>
+
+      <div class="col-2">
+        </br>
+        <div class="actions">
+          <%= form.submit "Відправити", class: 'btn btn-outline-dark', style: 'color: white' %></br></br>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div style="height: 52px;"></div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const photoUpload = document.getElementById("photo-upload");
+    const photoPreview = document.getElementById("photo-preview");
+
+    photoUpload.addEventListener("change", function() {
+      const file = this.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          photoPreview.src = event.target.result;
+          photoPreview.style.display = "block";
+        };
+
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+
+
+</script>
